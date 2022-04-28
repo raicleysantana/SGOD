@@ -1,3 +1,7 @@
+<?php
+include 'config/conf.php';
+?>
+
 <!DOCTYPE html>
 <html dir="ltr" lang="pt-BR ">
 
@@ -17,15 +21,21 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-    <?php include "layouts/header.php"; ?>
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/style.min.css">
 </head>
 
 <body>
-<?php include "pages/home/index.php"; ?>
 
-<?php include "layouts/footer.php"; ?>
+<div id="app">
+    <?php include "pages/home/index.php"; ?>
+</div>
 
+<script src="<?= BASE_URL ?>/assets/libs/jquery/dist/jquery.min.js"></script>
+<script src="<?= BASE_URL ?>/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="<?= BASE_URL ?>/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+<script src="<?= BASE_URL ?>/assets/js/waves.js"></script>
+<script src="<?= BASE_URL ?>/assets/js/sidebarmenu.js"></script>
+<script src="<?= BASE_URL ?>/assets/js/custom.min.js"></script>
 <script>
     $(function () {
 
