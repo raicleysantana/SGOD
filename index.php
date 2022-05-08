@@ -22,11 +22,15 @@ include 'config/conf.php';
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/style.min.css">
+    <link
+            href="<?= BASE_URL ?>/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css"
+            rel="stylesheet"
+    />
 </head>
 
 <body>
 
-<div id="app">
+<div>
     <?php include "pages/home/index.php"; ?>
 </div>
 
@@ -36,9 +40,21 @@ include 'config/conf.php';
 <script src="<?= BASE_URL ?>/assets/js/waves.js"></script>
 <script src="<?= BASE_URL ?>/assets/js/sidebarmenu.js"></script>
 <script src="<?= BASE_URL ?>/assets/js/custom.min.js"></script>
+<script src="<?= BASE_URL ?>/assets/extra-libs/DataTables/datatables.min.js"></script>
 <script>
     $(function () {
+        $('a').click(function (e) {
+            e.preventDefault();
 
+            let url = $(this).attr('href');
+
+            $.ajax({
+                url: `pages/${url}`,
+                success: function (data) {
+                    $('#home').html(data);
+                }
+            });
+        });
     });
 </script>
 </body>

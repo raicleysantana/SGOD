@@ -24,7 +24,7 @@
                     </a>
                     <ul aria-expanded="false" class="collapse first-level">
                         <li class="sidebar-item">
-                            <a href="form-basic.html" class="sidebar-link"
+                            <a href="alunos/index.php" class="sidebar-link"
                             >
                                 <i class="mdi mdi-note-outline"></i>
                                 <span class="hide-menu"> Alunos </span>
