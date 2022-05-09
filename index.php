@@ -43,20 +43,29 @@ include 'config/conf.php';
 <script src="<?= BASE_URL ?>/assets/extra-libs/DataTables/datatables.min.js"></script>
 <script>
     $(function () {
-        $('a').click(function (e) {
+        $(document).on('click', 'a', function (e) {
             e.preventDefault();
 
             let url = $(this).attr('href');
+
+            if (['javascript:void(0)', '#'].includes(url)) return false;
+
+            $(".preloader").show();
 
             $.ajax({
                 url: `pages/${url}`,
                 success: function (data) {
                     $('#home').html(data);
+                },
+                complete: function (data) {
+                    $(".preloader").fadeOut();
                 }
-            });
+            })
+                .fail(function (error) {
+                    alert(`Error: ${error.statusText}`);
+                });
         });
     });
 </script>
 </body>
-
 </html>

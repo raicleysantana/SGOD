@@ -55,29 +55,49 @@
 
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Alunos</h5>
+                    <div class="d-flex flex-row justify-content-between mb-3">
+                        <h5 class="card-title">Alunos</h5>
+
+                        <a href="alunos/form.php">
+                            <button type="button" class="btn btn-success btn-sm text-white">
+                                Novo Aluno
+                            </button>
+                        </a>
+                    </div>
+
                     <div class="table-responsive">
-                        <table
-                                id="zero_config"
-                                class="table table-striped table-bordered"
-                        >
+                        <table class="table">
                             <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Nome</th>
                                 <th>CPF</th>
                                 <th>Turma</th>
-                                <th>Ações</th>
+                                <th style="width: 25%">Ações</th>
                             </tr>
                             </thead>
                             <tbody>
 
                             <tr>
                                 <td>1</td>
-                                <td>Customer Support</td>
-                                <td>New York</td>
+                                <td>Raicley Santana da silva</td>
+                                <td>037.821.052-14</td>
                                 <td>27</td>
-                                <td>2011/01/25</td>
+                                <td>
+                                    <a href="#">
+                                        <button type="button" class="btn btn-cyan btn-sm text-white">
+                                            Visualizar
+                                        </button>
+                                    </a>
+                                    <a href="alunos/form.php">
+                                        <button type="button" class="btn btn-warning btn-sm text-white">
+                                            Editar
+                                        </button>
+                                    </a>
+                                    <button type="button" class="btn btn-danger btn-sm text-white">
+                                        Excluir
+                                    </button>
+                                </td>
                             </tr>
                             </tbody>
                         </table>

@@ -37,6 +37,13 @@
                                 <span class="hide-menu"> Servidores </span>
                             </a>
                         </li>
+                        <li class="sidebar-item">
+                            <a href="alunos/index.php" class="sidebar-link"
+                            >
+                                <i class="mdi mdi-note-outline"></i>
+                                <span class="hide-menu"> Turmas </span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li class="sidebar-item">
