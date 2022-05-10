@@ -38,7 +38,7 @@
                 </div>
                 <div class="form-group">
                     <label>
-                        Celular <small class="text-muted">(999) 999-9999</small>
+                        Contato <small class="text-muted">(999) 999-9999</small>
                     </label>
                     <input
                             type="text"
@@ -49,36 +49,35 @@
                 </div>
                 <div class="form-group">
                     <label>
-                        International Number <small class="text-muted">+19 999 999 999</small>
+                        CPF <span class="text-muted">999.999.999-99</span>
                     </label>
                     <input
                             type="text"
                             class="form-control international-inputmask"
                             id="international-mask"
-                            placeholder="International Phone Number"
+                            placeholder="Entre com o CPF"
                     />
                 </div>
                 <div class="form-group">
                     <label>
-                        Phone / xEx <small class="text-muted">(999) 999-9999 / x999999</small>
+                        Email
                     </label>
                     <input
                             type="text"
                             class="form-control xphone-inputmask"
                             id="xphone-mask"
-                            placeholder="Enter Phone Number"
+                            placeholder="Entre com o E-Mail"
                     />
                 </div>
                 <div class="form-group">
                     <label
-                    >Purchase Order
-                        <small class="text-muted">aaaa 9999-****</small></label
-                    >
+                    >Nome do Responsavel
+                    </label>
                     <input
                             type="text"
                             class="form-control purchase-inputmask"
                             id="purchase-mask"
-                            placeholder="Enter Purchase Order"
+                            placeholder="Entre com o nome do responsavel"
                     />
                 </div>
 

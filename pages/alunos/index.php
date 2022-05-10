@@ -77,28 +77,29 @@
                             </tr>
                             </thead>
                             <tbody>
-
-                            <tr>
-                                <td>1</td>
-                                <td>Raicley Santana da silva</td>
-                                <td>037.821.052-14</td>
-                                <td>27</td>
-                                <td>
-                                    <a href="#">
-                                        <button type="button" class="btn btn-cyan btn-sm text-white">
-                                            Visualizar
+                            <?php for ($i = 1; $i <= 20; $i++) { ?>
+                                <tr>
+                                    <td><?= $i ?></td>
+                                    <td>Lorem ipsum</td>
+                                    <td>000.000.000-00</td>
+                                    <td>Turma 01</td>
+                                    <td>
+                                        <a href="alunos/visualizar.php">
+                                            <button type="button" class="btn btn-cyan btn-sm text-white">
+                                                Visualizar
+                                            </button>
+                                        </a>
+                                        <a href="alunos/form.php">
+                                            <button type="button" class="btn btn-secondary btn-sm text-white">
+                                                Editar
+                                            </button>
+                                        </a>
+                                        <button type="button" class="btn btn-danger btn-sm text-white">
+                                            Excluir
                                         </button>
-                                    </a>
-                                    <a href="alunos/form.php">
-                                        <button type="button" class="btn btn-warning btn-sm text-white">
-                                            Editar
-                                        </button>
-                                    </a>
-                                    <button type="button" class="btn btn-danger btn-sm text-white">
-                                        Excluir
-                                    </button>
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
+                            <?php } ?>
                             </tbody>
                         </table>
                     </div>
