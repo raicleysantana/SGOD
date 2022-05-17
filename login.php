@@ -1,125 +1,138 @@
 <?php
-include 'config/conf.php';
-?>
+include 'config/conf.php'; ?>
 
 <!DOCTYPE html>
-<html dir="ltr">
+<html dir="ltr" lang="en">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="robots" content="noindex,nofollow"/>
     <title>SGODP - SISTEMA DE GESTÃO DE OCORRÊNCIAS DISCIPLINARES PEDAGOGICAS</title>
-    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/style.min.css">
+    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+
+    <!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="assets/images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="assets/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="assets/css/icons/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="assets/css/icons/Linearicons-Free-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="assets/vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="assets/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="assets/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="assets/vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="assets/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="assets/css/login/util.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/login/main.css">
+<!--===============================================================================================-->
+
 </head>
 
-<body class="bg-dark">
+<body style="background-color: #666666;">
+	
+<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form">
+					<span class="login100-form-title p-b-43">
+						Login para continuar
+					</span>
+					
+					
+					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+						<input class="input100" type="text" name="email">
+						<span class="focus-input100"></span>
+						<span class="label-input100">Email</span>
+					</div>
+					
+					
+					<div class="wrap-input100 validate-input" data-validate="Password is required">
+						<input class="input100" type="password" name="pass">
+						<span class="focus-input100"></span>
+						<span class="label-input100">Senha</span>
+					</div>
 
-<div class="main-wrapper">
+					<div class="flex-sb-m w-full p-t-3 p-b-32">
+						<div class="contact100-form-checkbox">
+							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+							<label class="label-checkbox100" for="ckb1">
+								Lembrar de mim
+							</label>
+						</div>
 
-    <div class="preloader">
-        <div class="lds-ripple">
-            <div class="lds-pos"></div>
-            <div class="lds-pos"></div>
-        </div>
-    </div>
+						<div>
+							<a href="#" class="txt1">
+								Esqueceu a senha?
+							</a>
+						</div>
+					</div>
+			
 
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn">
+							Entrar
+						</button>
+					</div>
+					
+					<div class="text-center p-t-46 p-b-20">
+						<span class="txt2">
+							ou logar usando
+						</span>
+					</div>
 
-    <div
-            class="
-          auth-wrapper
-          d-md-flex
-          no-block
-          justify-content-center
-          align-items-center
-          bg-dark
-        "
-    >
-        <div class="col-md-6 col-sm-12 px-4">
-            <div class="row">
-                <div id="loginform" style="margin-top: 10rem!important">
+					<div class="login100-form-social flex-c-m">
+						<a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
+							<i class="fa fa-facebook-f" aria-hidden="true"></i>
+						</a>
 
-                    <!-- Form -->
-                    <form
-                            class="form-horizontal"
-                            id="loginform"
-                            action="index.html"
-                    >
-                        <div class="row pb-4">
-                            <div class="col-12">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                      <span
-                                              class="input-group-text bg-success text-white h-100"
-                                              id="basic-addon1"
-                                      ><i class="mdi mdi-account fs-4"></i>
-                                      </span>
-                                    </div>
-                                    <input
-                                            type="text"
-                                            class="form-control form-control-lg"
-                                            placeholder="Usuário"
-                                            aria-label="usuario"
-                                            aria-describedby="basic-addon1"
-                                            required=""
-                                    />
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                      <span
-                                              class="input-group-text bg-warning text-white h-100"
-                                              id="basic-addon2"
-                                      ><i class="mdi mdi-lock fs-4"></i>
-                                      </span>
-                                    </div>
-                                    <input
-                                            type="text"
-                                            class="form-control form-control-lg"
-                                            placeholder="Senha"
-                                            aria-label="senha"
-                                            aria-describedby="basic-addon1"
-                                            required=""
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row border-top border-secondary">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <div class="pt-3">
-                                        <button
-                                                class="btn btn-info"
-                                                id="to-recover"
-                                                type="button"
-                                        >
-                                            <i class="mdi mdi-lock me-1"></i> Recuperar senha?
-                                        </button>
-                                        <button
-                                                class="btn btn-success float-end text-white"
-                                                type="submit"
-                                        >
-                                            Entrar
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+						<a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
+							<i class="fa fa-twitter" aria-hidden="true"></i>
+						</a>
+					</div>
+				</form>
 
-            </div>
-        </div>
-    </div>
-</div>
+				<div class="login100-more" style="background-image: url('assets/images/44571.png');">
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
 
-<script src="<?= BASE_URL ?>/assets/libs/jquery/dist/jquery.min.js"></script>
-<script src="<?= BASE_URL ?>/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	
+	
+<!--===============================================================================================-->
+	<script src="assets/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="assets/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="assets/vendor/bootstrap/js/popper.js"></script>
+	<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="assets/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="assets/vendor/daterangepicker/moment.min.js"></script>
+	<script src="assets/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="assets/vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="assets/js/main.js"></script>
+
 
 <script>
     $(".preloader").fadeOut();
