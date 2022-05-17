@@ -22,6 +22,7 @@ include 'config/conf.php';
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/style.min.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/vendor/jquery-confirm/css/jquery-confirm.min.css">
     <link
             href="<?= BASE_URL ?>/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css"
             rel="stylesheet"
@@ -35,6 +36,8 @@ include 'config/conf.php';
 </div>
 
 <script src="<?= BASE_URL ?>/assets/libs/jquery/dist/jquery.min.js"></script>
+<script src="<?= BASE_URL ?>/assets/vendor/jquery-confirm/js/jquery-confirm.min.js"></script>
+<script src="<?= BASE_URL ?>/assets/vendor/jquery/jquery.validate.min.js"></script>
 <script src="<?= BASE_URL ?>/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="<?= BASE_URL ?>/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
 <script src="<?= BASE_URL ?>/assets/js/waves.js"></script>
@@ -52,18 +55,22 @@ include 'config/conf.php';
 
             $(".preloader").show();
 
-            $.ajax({
-                url: `pages/${url}`,
-                success: function (data) {
-                    $('#home').html(data);
-                },
-                complete: function (data) {
-                    $(".preloader").fadeOut();
-                }
-            })
-                .fail(function (error) {
-                    alert(`Error: ${error.statusText}`);
-                });
+            if ($(this).data('redirect') == true) {
+                window.location = url;
+            } else {
+                $.ajax({
+                    url: `pages/${url}`,
+                    success: function (data) {
+                        $('#home').html(data);
+                    },
+                    complete: function (data) {
+                        $(".preloader").fadeOut();
+                    }
+                })
+                    .fail(function (error) {
+                        alert(`Error: ${error.statusText}`);
+                    });
+            }
         });
     });
 </script>

@@ -31,14 +31,14 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="form-basic.html" class="sidebar-link"
+                            <a href="participante/index.php" class="sidebar-link"
                             >
                                 <i class="mdi mdi-note-outline"></i>
                                 <span class="hide-menu"> Servidores </span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="alunos/index.php" class="sidebar-link"
+                            <a href="turma/index.php" class="sidebar-link"
                             >
                                 <i class="mdi mdi-note-outline"></i>
                                 <span class="hide-menu"> Turmas </span>

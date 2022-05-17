@@ -1,4 +1,5 @@
 <?php
+include '../../config/includes.php';
 ?>
 
 <div class="page-breadcrumb">
@@ -34,18 +35,20 @@
                     <div class="form-group row">
                         <label for="turma" class="col-sm-1 text-start control-label col-form-label">Turma</label>
                         <div class="col-sm-11">
-                            <select class="form-control">
+                            <select id="turma" class="form-control">
                                 <option value=""></option>
-                                <option value="">Turma 01</option>
-                                <option value="">Turma 02</option>
-                                <option value="">Turma 03</option>
-                                <option value="">Turma 04</option>
+                                <?php
+                                $query = "SELECT * FROM turma";
+                                $result = mysqli_query($con, $query);
+                                while ($d = mysqli_fetch_object($result)):?>
+                                    <option value="<?= $d->id_turma ?>"><?= $d->numero_turma ?></option>
+                                <?php endwhile; ?>
                             </select>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <button class="btn btn-success text-white">Filtrar</button>
+                        <button type="button" class="btn btn-success text-white filtrar">Filtrar</button>
                     </div>
                 </div>
             </div>
@@ -65,44 +68,10 @@
                         </a>
                     </div>
 
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Nome</th>
-                                <th>CPF</th>
-                                <th>Turma</th>
-                                <th style="width: 25%">Ações</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php for ($i = 1; $i <= 20; $i++) { ?>
-                                <tr>
-                                    <td><?= $i ?></td>
-                                    <td>Lorem ipsum</td>
-                                    <td>000.000.000-00</td>
-                                    <td>Turma 01</td>
-                                    <td>
-                                        <a href="alunos/visualizar.php">
-                                            <button type="button" class="btn btn-cyan btn-sm text-white">
-                                                Visualizar
-                                            </button>
-                                        </a>
-                                        <a href="alunos/form.php">
-                                            <button type="button" class="btn btn-secondary btn-sm text-white">
-                                                Editar
-                                            </button>
-                                        </a>
-                                        <button type="button" class="btn btn-danger btn-sm text-white">
-                                            Excluir
-                                        </button>
-                                    </td>
-                                </tr>
-                            <?php } ?>
-                            </tbody>
-                        </table>
+                    <div id="resultado-turma">
+
                     </div>
+
                 </div>
             </div>
         </div>
@@ -113,5 +82,25 @@
 <script>
     $(function () {
         $(".table").DataTable();
+
+        <?php if($_GET['turma']): ?>
+        loadAlunos('<?= $_GET['turma']?>')
+        <?php endif; ?>
+
+        $('.filtrar').click(function () {
+            let turma = $('#turma').val();
+
+            loadAlunos(turma);
+        });
+
+        function loadAlunos(turma) {
+            $.ajax({
+                url: 'pages/alunos/tabela.php',
+                data: {turma},
+                success: function (data) {
+                    $("#resultado-turma").html(data);
+                }
+            })
+        }
     });
 </script>

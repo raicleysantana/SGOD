@@ -4,7 +4,7 @@
             <!-- ============================================================== -->
             <!-- Logo -->
             <!-- ============================================================== -->
-            <a class="navbar-brand text-center justify-content-md-center" href="index.html">
+            <a class="navbar-brand text-center justify-content-md-center" href="./" data-redirect="true">
                 <!-- Logo icon -->
                 <h3>
                     <b class="logo-icon ps-2">
