@@ -1,4 +1,11 @@
 <?php
+include '../../config/includes.php';
+
+$id = $_GET['id'];
+
+$query = "SELECT * FROM aluno WHERE id_matricula = '{$id}'";
+$result = mysqli_query($con, $query);
+$d = mysqli_fetch_object($result);
 
 ?>
 
@@ -27,6 +34,7 @@
 
         <div class="comment-text w-100">
             <div class="py-2">
+                <a href="aluno/form.php?id=<?= $id; ?>"></a>
                 <button type="button" class="btn btn-cyan btn-sm text-white">
                     Editar
                 </button>

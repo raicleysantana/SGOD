@@ -68,6 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' and $_POST['acao'] === 'excluir') {
                             <tbody>
                             <?php
                             $result = mysqli_query($con, "SELECT * FROM turma");
+
                             while ($d = mysqli_fetch_object($result)):
                                 ?>
                                 <tr>
