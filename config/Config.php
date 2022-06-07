@@ -2,5 +2,5 @@
 
 class Config
 {
-    public static $baseUrl = "http://localhost/sgodp2";
+    public static $baseUrl = "http://localhost/sgodp";
 }
