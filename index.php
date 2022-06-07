@@ -1,78 +1,97 @@
-<?php
-include 'config/conf.php';
-?>
-
 <!DOCTYPE html>
-<html dir="ltr" lang="pt-BR ">
+<html dir="ltr" lang="pt-BR">
 
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="keywords" content=""/>
-    <meta name="description" content=""/>
     <meta name="robots" content="noindex,nofollow"/>
     <title>SGODP - SISTEMA DE GESTÃO DE OCORRÊNCIAS DISCIPLINARES PEDAGOGICAS</title>
 
-    <!-- Suporte para HTML5 Shim e Respond.js IE8 de elementos HTML5 e consultas de mídia -->
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/style.min.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/vendor/jquery-confirm/css/jquery-confirm.min.css">
-    <link
-            href="<?= BASE_URL ?>/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css"
-            rel="stylesheet"
-    />
+
+    <link rel="stylesheet" href="assets/css/login/main.css">
+    <link rel="stylesheet" href="assets/css/login/util.css">
+    <link rel="stylesheet" href="assets/css/style.min.css">
+
+    <script type="application/javascript" src="assets/libs/jquery/dist/jquery.min.js"></script>
+    <script type="application/javascript" src="assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="application/javascript" src="assets/js/main.js"></script>
+
 </head>
 
-<body>
+<body style="background-color: #666666;">
 
-<div>
-    <?php include "pages/home/index.php"; ?>
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <form id="form-login" class="login100-form validate-form">
+					<span class="login100-form-title p-b-43">
+						Login para continuar
+					</span>
+
+                <div class="wrap-input100 validate-input" data-validate="E-Mail válido é requerido">
+                    <input
+                            class="input100"
+                            type="text"
+                            name="usu_nome"
+                    >
+                    <span class="focus-input100"></span>
+                    <span class="label-input100">Email</span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Senha é obrigatório">
+                    <input
+                            class="input100"
+                            type="password"
+                            name="usu_senha"
+                    >
+                    <span class="focus-input100"></span>
+                    <span class="label-input100">Senha</span>
+                </div>
+
+                <div class="flex-sb-m w-full p-t-3 p-b-32">
+                    <div class="contact100-form-checkbox">
+                        <input
+                                class="input-checkbox100"
+                                id="ckb1"
+                                type="checkbox"
+                                name="remember-me"
+                        >
+                        <label class="label-checkbox100" for="ckb1">
+                            Lembrar de mim
+                        </label>
+                    </div>
+
+                    <div>
+                        <a href="#" class="txt1">
+                            Esqueceu a senha?
+                        </a>
+                    </div>
+                </div>
+
+                <div class="container-login100-form-btn">
+                    <button type="submit" class="login100-form-btn">
+                        Entrar
+                    </button>
+                </div>
+            </form>
+
+            <div
+                    class="login100-more"
+                    style="background-image: url('img/background_aside.png');"
+            >
+            </div>
+        </div>
+    </div>
 </div>
 
-<script src="<?= BASE_URL ?>/assets/libs/jquery/dist/jquery.min.js"></script>
-<script src="<?= BASE_URL ?>/assets/vendor/jquery-confirm/js/jquery-confirm.min.js"></script>
-<script src="<?= BASE_URL ?>/assets/vendor/jquery/jquery.validate.min.js"></script>
-<script src="<?= BASE_URL ?>/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="<?= BASE_URL ?>/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-<script src="<?= BASE_URL ?>/assets/js/waves.js"></script>
-<script src="<?= BASE_URL ?>/assets/js/sidebarmenu.js"></script>
-<script src="<?= BASE_URL ?>/assets/js/custom.min.js"></script>
-<script src="<?= BASE_URL ?>/assets/extra-libs/DataTables/datatables.min.js"></script>
-<script>
-    $(function () {
-        $(document).on('click', 'a', function (e) {
-            e.preventDefault();
 
-            let url = $(this).attr('href');
-
-            if (['javascript:void(0)', '#'].includes(url)) return false;
-
-            $(".preloader").show();
-
-            if ($(this).data('redirect') == true) {
-                window.location = url;
-            } else {
-                $.ajax({
-                    url: `pages/${url}`,
-                    success: function (data) {
-                        $('#home').html(data);
-                    },
-                    complete: function (data) {
-                        $(".preloader").fadeOut();
-                    }
-                })
-                    .fail(function (error) {
-                        alert(`Error: ${error.statusText}`);
-                    });
-            }
-        });
-    });
-</script>
 </body>
 </html>
+

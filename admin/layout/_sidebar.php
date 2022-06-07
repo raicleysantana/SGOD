@@ -7,7 +7,7 @@
                 <li class="sidebar-item">
                     <a
                             class="sidebar-link waves-effect waves-dark sidebar-link"
-                            href="index.html"
+                            href="<?= Config::$baseUrl ?>/admin"
                             aria-expanded="false"
                     >
                         <i class="mdi mdi-view-dashboard"></i>
@@ -24,7 +24,7 @@
                     </a>
                     <ul aria-expanded="false" class="collapse first-level">
                         <li class="sidebar-item">
-                            <a href="alunos/index.php" class="sidebar-link"
+                            <a href="<?= Config::$baseUrl; ?>/admin/cadastros/alunos/alunos.php" class="sidebar-link"
                             >
                                 <i class="mdi mdi-note-outline"></i>
                                 <span class="hide-menu"> Alunos </span>
@@ -38,7 +38,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="turma/index.php" class="sidebar-link"
+                            <a href="<?= Config::$baseUrl; ?>/admin/cadastros/turmas/turmas.php" class="sidebar-link"
                             >
                                 <i class="mdi mdi-note-outline"></i>
                                 <span class="hide-menu"> Turmas </span>
@@ -90,3 +90,5 @@
     </div>
     <!-- End Sidebar scroll-->
 </aside>
+<div class="page-wrapper">
+

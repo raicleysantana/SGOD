@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 17-Maio-2022 às 22:16
+-- Tempo de geração: 07-Jun-2022 às 05:09
 -- Versão do servidor: 10.4.21-MariaDB
 -- versão do PHP: 7.4.24
 
@@ -24,217 +24,180 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `aluno`
+-- Estrutura da tabela `alunos`
 --
 
-CREATE TABLE `aluno` (
-  `id_matricula` int(11) NOT NULL,
-  `nome_aluno` varchar(40) NOT NULL,
-  `id_turma` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Extraindo dados da tabela `aluno`
---
-
-INSERT INTO `aluno` (`id_matricula`, `nome_aluno`, `id_turma`) VALUES
-(1, 'TESTE', 3);
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `cargo`
---
-
-CREATE TABLE `cargo` (
-  `id_cargo` int(11) NOT NULL,
-  `tipo_cargo` varchar(40) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Extraindo dados da tabela `cargo`
---
-
-INSERT INTO `cargo` (`id_cargo`, `tipo_cargo`) VALUES
-(1, 'Secretário'),
-(2, 'Diretor');
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `ocorrencia`
---
-
-CREATE TABLE `ocorrencia` (
-  `id_ocorrencia` int(11) NOT NULL,
-  `descricao` varchar(100) NOT NULL,
-  `data_hora` datetime NOT NULL,
-  `id_participante` int(11) NOT NULL,
-  `id_tipo_ocorrencia` int(11) NOT NULL,
-  `id_matricula` int(11) NOT NULL
+CREATE TABLE `alunos` (
+  `alu_id` int(11) NOT NULL,
+  `alu_nome` varchar(60) NOT NULL,
+  `alu_dtnascimento` varchar(45) NOT NULL,
+  `alu_nome_responsavel` varchar(45) NOT NULL,
+  `alu_contato` varchar(45) DEFAULT NULL,
+  `alu_situacao` char(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `participante`
+-- Estrutura da tabela `cargos`
 --
 
-CREATE TABLE `participante` (
-  `id_participante` int(11) NOT NULL,
-  `nome_participante` varchar(40) NOT NULL,
-  `id_cargo` int(11) NOT NULL,
-  `email` varchar(80) NOT NULL,
-  `senha` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Extraindo dados da tabela `participante`
---
-
-INSERT INTO `participante` (`id_participante`, `nome_participante`, `id_cargo`, `email`, `senha`) VALUES
-(1, 'admin', 2, 'admin@admin.com', '@dmin'),
-(2, 'teste', 2, 'teste@gmail.com', 'd41d8cd98f00b204e9800998ecf8427e'),
-(3, 'teste2', 1, 'teste2@gmail.com', 'd41d8cd98f00b204e9800998ecf8427e');
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `tipo_ocorrencia`
---
-
-CREATE TABLE `tipo_ocorrencia` (
-  `id_tipo_ocorrencia` int(11) NOT NULL,
-  `transgressao` varchar(40) NOT NULL
+CREATE TABLE `cargos` (
+  `cgo_id` int(11) NOT NULL,
+  `cgo_nome` varchar(45) NOT NULL,
+  `cgo_status` char(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `turma`
+-- Estrutura da tabela `ocorrencias`
 --
 
-CREATE TABLE `turma` (
-  `id_turma` int(11) NOT NULL,
-  `numero_turma` varchar(30) NOT NULL
+CREATE TABLE `ocorrencias` (
+  `ocr_id` int(11) NOT NULL,
+  `ocr_numero` varchar(45) NOT NULL,
+  `alu_id` int(11) NOT NULL,
+  `turma_id` int(11) NOT NULL,
+  `part_id` int(11) DEFAULT NULL,
+  `tpo_id` int(11) NOT NULL,
+  `ocr_descricao` text DEFAULT NULL,
+  `ocr_dtcriacao` datetime NOT NULL DEFAULT current_timestamp(),
+  `ocr_dtfinalizacao` datetime DEFAULT NULL,
+  `ocr_punicao` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------------------------------
+
 --
--- Extraindo dados da tabela `turma`
+-- Estrutura da tabela `participantes`
 --
 
-INSERT INTO `turma` (`id_turma`, `numero_turma`) VALUES
-(2, '5 serie'),
-(3, '6 serie');
+CREATE TABLE `participantes` (
+  `part_id` int(11) NOT NULL,
+  `part_nome` varchar(60) NOT NULL,
+  `part_usuario` varchar(45) DEFAULT NULL,
+  `part_senha` varchar(255) DEFAULT NULL,
+  `part_email` varchar(100) DEFAULT NULL,
+  `cgo_id` int(11) DEFAULT NULL,
+  `part_situacao` char(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tipos_ocorrencia`
+--
+
+CREATE TABLE `tipos_ocorrencia` (
+  `tpo_id` int(11) NOT NULL,
+  `tpo_descricao` varchar(45) NOT NULL,
+  `tpo_situacao` char(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `turmas`
+--
+
+CREATE TABLE `turmas` (
+  `turma_id` int(11) NOT NULL,
+  `turma_numero` varchar(30) NOT NULL,
+  `turma_situacao` char(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Índices para tabelas despejadas
 --
 
 --
--- Índices para tabela `aluno`
+-- Índices para tabela `alunos`
 --
-ALTER TABLE `aluno`
-  ADD PRIMARY KEY (`id_matricula`),
-  ADD KEY `id_turma` (`id_turma`);
+ALTER TABLE `alunos`
+  ADD PRIMARY KEY (`alu_id`);
 
 --
--- Índices para tabela `cargo`
+-- Índices para tabela `cargos`
 --
-ALTER TABLE `cargo`
-  ADD PRIMARY KEY (`id_cargo`);
+ALTER TABLE `cargos`
+  ADD PRIMARY KEY (`cgo_id`);
 
 --
--- Índices para tabela `ocorrencia`
+-- Índices para tabela `ocorrencias`
 --
-ALTER TABLE `ocorrencia`
-  ADD PRIMARY KEY (`id_ocorrencia`),
-  ADD KEY `id_participante` (`id_participante`),
-  ADD KEY `id_tipo_ocorrencia` (`id_tipo_ocorrencia`),
-  ADD KEY `id_matricula` (`id_matricula`);
+ALTER TABLE `ocorrencias`
+  ADD PRIMARY KEY (`ocr_id`),
+  ADD KEY `fk_aluno` (`alu_id`),
+  ADD KEY `fk_turma_idx` (`turma_id`),
+  ADD KEY `fk_participantes` (`part_id`),
+  ADD KEY `fk_tipo_ocorrencia` (`tpo_id`);
 
 --
--- Índices para tabela `participante`
+-- Índices para tabela `participantes`
 --
-ALTER TABLE `participante`
-  ADD PRIMARY KEY (`id_participante`),
-  ADD KEY `id_cargo` (`id_cargo`);
+ALTER TABLE `participantes`
+  ADD PRIMARY KEY (`part_id`),
+  ADD KEY `fk_cargo_idx` (`cgo_id`);
 
 --
--- Índices para tabela `tipo_ocorrencia`
+-- Índices para tabela `tipos_ocorrencia`
 --
-ALTER TABLE `tipo_ocorrencia`
-  ADD PRIMARY KEY (`id_tipo_ocorrencia`);
+ALTER TABLE `tipos_ocorrencia`
+  ADD PRIMARY KEY (`tpo_id`);
 
 --
--- Índices para tabela `turma`
+-- Índices para tabela `turmas`
 --
-ALTER TABLE `turma`
-  ADD PRIMARY KEY (`id_turma`);
+ALTER TABLE `turmas`
+  ADD PRIMARY KEY (`turma_id`);
 
 --
 -- AUTO_INCREMENT de tabelas despejadas
 --
 
 --
--- AUTO_INCREMENT de tabela `aluno`
+-- AUTO_INCREMENT de tabela `cargos`
 --
-ALTER TABLE `aluno`
-  MODIFY `id_matricula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `cargos`
+  MODIFY `cgo_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `cargo`
+-- AUTO_INCREMENT de tabela `participantes`
 --
-ALTER TABLE `cargo`
-  MODIFY `id_cargo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `participantes`
+  MODIFY `part_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `ocorrencia`
+-- AUTO_INCREMENT de tabela `tipos_ocorrencia`
 --
-ALTER TABLE `ocorrencia`
-  MODIFY `id_ocorrencia` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `tipos_ocorrencia`
+  MODIFY `tpo_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `participante`
+-- AUTO_INCREMENT de tabela `turmas`
 --
-ALTER TABLE `participante`
-  MODIFY `id_participante` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de tabela `tipo_ocorrencia`
---
-ALTER TABLE `tipo_ocorrencia`
-  MODIFY `id_tipo_ocorrencia` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de tabela `turma`
---
-ALTER TABLE `turma`
-  MODIFY `id_turma` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `turmas`
+  MODIFY `turma_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restrições para despejos de tabelas
 --
 
 --
--- Limitadores para a tabela `aluno`
+-- Limitadores para a tabela `ocorrencias`
 --
-ALTER TABLE `aluno`
-  ADD CONSTRAINT `aluno_ibfk_1` FOREIGN KEY (`id_turma`) REFERENCES `turma` (`id_turma`);
+ALTER TABLE `ocorrencias`
+  ADD CONSTRAINT `fk_aluno` FOREIGN KEY (`alu_id`) REFERENCES `alunos` (`alu_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_participantes` FOREIGN KEY (`part_id`) REFERENCES `participantes` (`part_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_tipo_ocorrencia` FOREIGN KEY (`tpo_id`) REFERENCES `tipos_ocorrencia` (`tpo_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_turma` FOREIGN KEY (`turma_id`) REFERENCES `turmas` (`turma_id`) ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `ocorrencia`
+-- Limitadores para a tabela `participantes`
 --
-ALTER TABLE `ocorrencia`
-  ADD CONSTRAINT `ocorrencia_ibfk_1` FOREIGN KEY (`id_participante`) REFERENCES `participante` (`id_participante`),
-  ADD CONSTRAINT `ocorrencia_ibfk_2` FOREIGN KEY (`id_tipo_ocorrencia`) REFERENCES `tipo_ocorrencia` (`id_tipo_ocorrencia`),
-  ADD CONSTRAINT `ocorrencia_ibfk_3` FOREIGN KEY (`id_matricula`) REFERENCES `aluno` (`id_matricula`);
-
---
--- Limitadores para a tabela `participante`
---
-ALTER TABLE `participante`
-  ADD CONSTRAINT `participante_ibfk_1` FOREIGN KEY (`id_cargo`) REFERENCES `cargo` (`id_cargo`);
+ALTER TABLE `participantes`
+  ADD CONSTRAINT `fk_cargo` FOREIGN KEY (`cgo_id`) REFERENCES `cargos` (`cgo_id`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
