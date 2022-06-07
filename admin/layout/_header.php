@@ -17,11 +17,11 @@ include_once __DIR__ . "/../../config/Config.php";
     <script type="application/javascript" src="<?= Config::$baseUrl ?>/assets/libs/jquery/dist/jquery.min.js"></script>
 
 
-    <!-- <style>
+    <style>
         .page-wrapper {
             min-height: 90vh;
         }
-    </style> -->
+    </style>
 </head>
 
 <body>
