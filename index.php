@@ -1,3 +1,24 @@
+<?php
+include_once "config/DBConnect.php";
+include_once "config/Autenticacao.php";
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $usuario = $_POST['usuario'];
+    $senha = $_POST['senha'];
+
+    $autenticacao = new Autenticacao();
+
+    if ($autenticacao->login($usuario, $senha)) {
+        $autenticacao->authLogin();
+        exit();
+    } else {
+        $msg = "Usuário não encontrado";
+    }
+
+}
+
+?>
 <!DOCTYPE html>
 <html dir="ltr" lang="pt-BR">
 
@@ -30,40 +51,42 @@
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100">
-            <form id="form-login" class="login100-form validate-form">
+            <form id="form-login" method="post" action="" class="login100-form validate-form">
 					<span class="login100-form-title p-b-43">
 						Login para continuar
 					</span>
 
-                <div class="wrap-input100 validate-input" data-validate="E-Mail válido é requerido">
+                <div class="form-floating mb-3">
                     <input
-                            class="input100"
                             type="text"
-                            name="usu_nome"
+                            class="form-control"
+                            id="usuario"
+                            name="usuario"
+                            placeholder="Usuário"
                     >
-                    <span class="focus-input100"></span>
-                    <span class="label-input100">Email</span>
+                    <label for="usuario">Usuário</label>
                 </div>
-
-                <div class="wrap-input100 validate-input" data-validate="Senha é obrigatório">
+                <div class="form-floating">
                     <input
-                            class="input100"
                             type="password"
-                            name="usu_senha"
+                            class="form-control"
+                            id="senha"
+                            name="senha"
+                            placeholder="Senha"
+                            autocomplete="new-password"
                     >
-                    <span class="focus-input100"></span>
-                    <span class="label-input100">Senha</span>
+                    <label for="senha">Senha</label>
                 </div>
 
-                <div class="flex-sb-m w-full p-t-3 p-b-32">
-                    <div class="contact100-form-checkbox">
+                <div class="flex-sb-m w-full p-t-3 p-b-32 mt-3">
+                    <div class="form-check">
                         <input
-                                class="input-checkbox100"
-                                id="ckb1"
+                                class="form-check-input"
                                 type="checkbox"
-                                name="remember-me"
+                                value=""
+                                id="flexCheckDefault"
                         >
-                        <label class="label-checkbox100" for="ckb1">
+                        <label class="form-check-label" for="flexCheckDefault">
                             Lembrar de mim
                         </label>
                     </div>
@@ -74,6 +97,9 @@
                         </a>
                     </div>
                 </div>
+                <?php if (!empty($msg)): ?>
+                    <div class="text-center text-danger mb-2"><?= $msg ?></div>
+                <?php endif; ?>
 
                 <div class="container-login100-form-btn">
                     <button type="submit" class="login100-form-btn">

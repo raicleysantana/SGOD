@@ -82,6 +82,7 @@ include_once "../../layout/breadcumbs.php";
                                     </a>
 
                                     <a
+                                            class="excluir"
                                             href="#"
                                             data-toggle="tooltip"
                                             data-placement="top"
@@ -99,5 +100,12 @@ include_once "../../layout/breadcumbs.php";
             </div>
         </div>
     </div>
+    <script>
+        $(function () {
+            $(".excluir").click(function (e) {
+             
+            })
+        });
+    </script>
 <?php
 include_once "../../layout/_footer.php";
