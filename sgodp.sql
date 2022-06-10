@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 07-Jun-2022 às 05:09
+-- Tempo de geração: 10-Jun-2022 às 05:48
 -- Versão do servidor: 10.4.21-MariaDB
 -- versão do PHP: 7.4.24
 
@@ -45,7 +45,7 @@ CREATE TABLE `alunos` (
 CREATE TABLE `cargos` (
   `cgo_id` int(11) NOT NULL,
   `cgo_nome` varchar(45) NOT NULL,
-  `cgo_status` char(1) NOT NULL DEFAULT '1'
+  `cgo_situacao` char(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -91,7 +91,7 @@ CREATE TABLE `participantes` (
 
 CREATE TABLE `tipos_ocorrencia` (
   `tpo_id` int(11) NOT NULL,
-  `tpo_descricao` varchar(45) NOT NULL,
+  `tpo_nome` varchar(45) NOT NULL,
   `tpo_situacao` char(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

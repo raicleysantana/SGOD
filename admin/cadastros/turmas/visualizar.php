@@ -30,7 +30,7 @@ $d = $stm->fetch(PDO::FETCH_OBJ);
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="<?= Config::$baseUrl ?>/admin">Início</a></li>
                         <li class="breadcrumb-item">
-                            <a href="<?= Config::$baseUrl ?>/admin/cadastros/turmas/turmas.php">Turmas</a>
+                            <a href="<?= Config::$baseUrl ?>/admin/cadastros/turmas/index.php">Turmas</a>
                         </li>
                         <li class="breadcrumb-item active" aria-current="page">
                             <?= !$id ? 'Cadastrar' : 'Editar' ?>
