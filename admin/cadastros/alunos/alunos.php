@@ -16,8 +16,7 @@ $stm = $db->prepare($query)->execute();
 
 ?>
     <div>
-
-        deodo
+ALUNOS
     </div>
 <?php
 include_once "../../layout/_footer.php";

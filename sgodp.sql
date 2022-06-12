@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 10-Jun-2022 às 05:48
+-- Tempo de geração: 13-Jun-2022 às 00:56
 -- Versão do servidor: 10.4.21-MariaDB
 -- versão do PHP: 7.4.24
 
@@ -48,6 +48,15 @@ CREATE TABLE `cargos` (
   `cgo_situacao` char(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Extraindo dados da tabela `cargos`
+--
+
+INSERT INTO `cargos` (`cgo_id`, `cgo_nome`, `cgo_situacao`) VALUES
+(1, 'Diretor', '1'),
+(2, 'Secretário', '1'),
+(4, 'Professor', '1');
+
 -- --------------------------------------------------------
 
 --
@@ -83,6 +92,13 @@ CREATE TABLE `participantes` (
   `part_situacao` char(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Extraindo dados da tabela `participantes`
+--
+
+INSERT INTO `participantes` (`part_id`, `part_nome`, `part_usuario`, `part_senha`, `part_email`, `cgo_id`, `part_situacao`) VALUES
+(1, 'admin', 'admin', '#admin', 'admin@gmail.com', 1, '1');
+
 -- --------------------------------------------------------
 
 --
@@ -95,6 +111,14 @@ CREATE TABLE `tipos_ocorrencia` (
   `tpo_situacao` char(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Extraindo dados da tabela `tipos_ocorrencia`
+--
+
+INSERT INTO `tipos_ocorrencia` (`tpo_id`, `tpo_nome`, `tpo_situacao`) VALUES
+(1, 'Algazarra', '1'),
+(2, 'Agressão física', '1');
+
 -- --------------------------------------------------------
 
 --
@@ -106,6 +130,15 @@ CREATE TABLE `turmas` (
   `turma_numero` varchar(30) NOT NULL,
   `turma_situacao` char(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `turmas`
+--
+
+INSERT INTO `turmas` (`turma_id`, `turma_numero`, `turma_situacao`) VALUES
+(3, '6º Ano', '1'),
+(5, '7º Ano', '1'),
+(6, '8º Ano', '1');
 
 --
 -- Índices para tabelas despejadas
@@ -160,25 +193,25 @@ ALTER TABLE `turmas`
 -- AUTO_INCREMENT de tabela `cargos`
 --
 ALTER TABLE `cargos`
-  MODIFY `cgo_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `cgo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `participantes`
 --
 ALTER TABLE `participantes`
-  MODIFY `part_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `part_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `tipos_ocorrencia`
 --
 ALTER TABLE `tipos_ocorrencia`
-  MODIFY `tpo_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `tpo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `turmas`
 --
 ALTER TABLE `turmas`
-  MODIFY `turma_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `turma_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restrições para despejos de tabelas
