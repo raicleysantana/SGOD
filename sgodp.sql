@@ -213,6 +213,13 @@ ALTER TABLE `tipos_ocorrencia`
 ALTER TABLE `turmas`
   MODIFY `turma_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
+
+--
+-- AUTO_INCREMENT de tabela `turmas`
+--
+ALTER TABLE `alunos`
+  MODIFY `alu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
 --
 -- Restrições para despejos de tabelas
 --
