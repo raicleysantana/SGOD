@@ -23,4 +23,19 @@ class Utils
             '0' => 'Inativo'
         ];
     }
+
+    public static function getPeriodo()
+    {
+        return [
+            'MANHA' => 'Manhã',
+            'TARDE' => 'Tarde',
+            'NOITE' => 'Noite'
+        ];
+    }
+
+    public static function periodo($periodo)
+    {
+        $data = self::getSituacao();
+        return $data[$periodo] ?: 'Não definido';
+    }
 }

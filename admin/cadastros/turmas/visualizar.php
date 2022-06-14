@@ -51,6 +51,10 @@ $d = $stm->fetch(PDO::FETCH_OBJ);
                 <div class="col-md-9"><?= $d->turma_numero; ?></div>
             </div>
             <div class="row">
+                <div class="col-md-3">Período</div>
+                <div class="col-md-9"><?= Utils::periodo($d->turma_periodo); ?></div>
+            </div>
+            <div class="row">
                 <div class="col-md-3">Situação</div>
                 <div class="col-md-9"><?= Utils::situacao($d->turma_situacao); ?></div>
             </div>

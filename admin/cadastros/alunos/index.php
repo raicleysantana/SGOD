@@ -62,7 +62,8 @@ include_once "../../layout/breadcumbs.php";
                                 <th scope="col" width="5%">#</th>
                                 <th scope="col" width="25%">Aluno</th>
                                 <th scope="col" width="25%">Responsavél</th>
-                                <th scope="col" width="25%">Contato</th>
+                                <th scope="col" width="15%">Contato</th>
+                                <th scope="col" width="20%">Situação</th>
                                 <th scope="col" width="20%">Ação</th>
                             </tr>
                         </thead>
@@ -82,6 +83,7 @@ include_once "../../layout/breadcumbs.php";
                                     <th scope="row"><?= $aluno->alu_id ?></th>
                                     <td><?= $aluno->alu_nome ?></td>
                                     <td><?= $aluno->alu_nome_responsavel ?></td>
+                                    <td><?= $aluno->alu_contato ?></td>
                                     <td><?= Utils::situacao($aluno->alu_situacao) ?></td>
                                     <td>
                                         <a href="<?= Config::$baseUrl ?>/admin/cadastros/alunos/visualizar.php?id=<?= $aluno->alu_id ?>" data-toggle="tooltip" data-placement="top" title="" data-bs-original-title="Visualizar">
