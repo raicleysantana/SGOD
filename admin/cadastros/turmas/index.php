@@ -62,8 +62,10 @@ include_once "../../layout/breadcumbs.php";
                             <thead>
                             <tr>
                                 <th scope="col" width="5%">#</th>
-                                <th scope="col" width="60%">Número</th>
-                                <th scope="col" width="20%">Situação</th>
+                                <th scope="col">Número</th>
+                                <th scope="col">Periodo</th>
+                                <th scope="col" width="15%">Qtd. Alunos</th>
+                                <th scope="col">Situação</th>
                                 <th scope="col" width="20%">Ação</th>
                             </tr>
                             </thead>
@@ -71,7 +73,7 @@ include_once "../../layout/breadcumbs.php";
                             <?php
                             $db = DBConnect::PDO();
 
-                            $query = "SELECT * FROM turmas";
+                            $query = "SELECT *, (SELECT COUNT(talu_id) FROM turma_aluno ta WHERE ta.turma_id = t.turma_id)AS qtd_alunos FROM turmas t";
                             $stm = $db->prepare($query);
                             $stm->execute();
 
@@ -82,6 +84,8 @@ include_once "../../layout/breadcumbs.php";
                                 <tr id="turma-<?= $turma->turma_id ?>">
                                     <th scope="row"><?= $turma->turma_id ?></th>
                                     <td><?= $turma->turma_numero ?></td>
+                                    <td><?= Utils::periodo($turma->periodo) ?></td>
+                                    <td><i class="mdi mdi-account-multiple"></i> <?= $turma->qtd_alunos ?></td>
                                     <td><?= Utils::situacao($turma->turma_situacao) ?></td>
                                     <td>
                                         <a

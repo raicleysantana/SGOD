@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 14-Jun-2022 às 15:36
--- Versão do servidor: 10.4.24-MariaDB
--- versão do PHP: 7.4.29
+-- Tempo de geração: 15-Jun-2022 às 05:28
+-- Versão do servidor: 10.4.21-MariaDB
+-- versão do PHP: 7.4.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -26,7 +26,8 @@ SET time_zone = "+00:00";
 --
 
 INSERT INTO `alunos` (`alu_id`, `alu_nome`, `alu_dtnascimento`, `alu_nome_responsavel`, `alu_contato`, `alu_situacao`) VALUES
-(1, 'Raicley Santana', '1998-02-01', 'teste', '(20) 02020-2020', '1');
+(1, 'Raicley Santana', '1998-02-01', 'teste', '(20) 02020-2020', '1'),
+(2, 'TESTE', '1999-01-01', 'teste', NULL, '1');
 
 --
 -- Extraindo dados da tabela `cargos`
@@ -50,7 +51,8 @@ INSERT INTO `participantes` (`part_id`, `part_nome`, `part_usuario`, `part_senha
 
 INSERT INTO `tipos_ocorrencia` (`tpo_id`, `tpo_nome`, `tpo_situacao`) VALUES
 (1, 'Algazarra', '1'),
-(2, 'Agressão física', '1');
+(2, 'Agressão física', '1'),
+(3, 'Vendendo drogas', '1');
 
 --
 -- Extraindo dados da tabela `turmas`
@@ -60,6 +62,13 @@ INSERT INTO `turmas` (`turma_id`, `turma_numero`, `turma_periodo`, `turma_situac
 (3, '6º Ano', NULL, '1'),
 (5, '7º Ano', NULL, '1'),
 (6, '8º Ano', NULL, '1');
+
+--
+-- Extraindo dados da tabela `turma_aluno`
+--
+
+INSERT INTO `turma_aluno` (`talu_id`, `alu_id`, `turma_id`) VALUES
+(1, 1, 3);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 14-Jun-2022 às 15:35
--- Versão do servidor: 10.4.24-MariaDB
--- versão do PHP: 7.4.29
+-- Tempo de geração: 15-Jun-2022 às 05:28
+-- Versão do servidor: 10.4.21-MariaDB
+-- versão do PHP: 7.4.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `alunos` (
   `alu_id` int(11) NOT NULL,
   `alu_nome` varchar(60) NOT NULL,
-  `alu_dtnascimento` varchar(45) NOT NULL,
+  `alu_dtnascimento` date NOT NULL,
   `alu_nome_responsavel` varchar(45) NOT NULL,
   `alu_contato` varchar(45) DEFAULT NULL,
   `alu_situacao` char(1) NOT NULL DEFAULT '1'
@@ -169,7 +169,8 @@ ALTER TABLE `turmas`
 -- Índices para tabela `turma_aluno`
 --
 ALTER TABLE `turma_aluno`
-  ADD PRIMARY KEY (`talu_id`);
+  ADD PRIMARY KEY (`talu_id`),
+  ADD UNIQUE KEY `INDEX_TURMA_ALUNO` (`alu_id`,`turma_id`);
 
 --
 -- AUTO_INCREMENT de tabelas despejadas

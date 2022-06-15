@@ -85,7 +85,7 @@ include_once "../../layout/breadcumbs.php";
                                     <td><?= Utils::situacao($tipo_ocorrencia->tpo_situacao) ?></td>
                                     <td>
                                         <a
-                                                href="<?= Config::$baseUrl ?>/admin/cadastros/tipos_ocorrencia/visualizar.php?id=<?= $tipo_ocorrencia->cargos ?>"
+                                                href="<?= Config::$baseUrl ?>/admin/cadastros/tipos_ocorrencia/visualizar.php?id=<?= $tipo_ocorrencia->tpo_id ?>"
                                                 data-toggle="tooltip"
                                                 data-placement="top"
                                                 title=""
