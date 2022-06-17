@@ -115,7 +115,7 @@ if ($id) {
 
                 <div class="form-group mt-3">
                     <label for="alu_contato">Contato</label>
-                    <input type="text" class="form-control" id="alu_contato" name="alu_contato" value="<?= $aluno->alu_contato ?>" required placeholder="" required>
+                    <input type="text" class="form-control" id="alu_contato" name="alu_contato" value="<?= $aluno->alu_contato ?>" placeholder="">
                 </div>
 
                 <div class="row">
