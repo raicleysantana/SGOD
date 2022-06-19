@@ -58,6 +58,7 @@ include_once "../layout/breadcumbs.php";
             $sql = "SELECT * FROM ocorrencias o "
                 . "LEFT JOIN alunos a ON a.alu_id = o.alu_id "
                 . "LEFT JOIN turmas t ON t.turma_id = o.turma_id "
+                . "LEFT JOIN tipos_ocorrencia tpo ON tpo.tpo_id = o.tpo_id "
                 . "WHERE true {$search} "
                 . "ORDER BY o.ocr_dtcriacao DESC";
             $stm = $db->prepare($sql);
@@ -67,15 +68,23 @@ include_once "../layout/breadcumbs.php";
             ?>
 
             <div class="col-md-12">
-                <h3>Pesquisar</h3>
-
-
+                <h4 class="mb-0">Filtros</h4>
                 <form action="" class="my-4">
 
                     <input type="hidden" name="acao" value="pesquisar">
 
                     <div class="row">
-                        <div class="col">
+                        <div class="col-lg-2">
+                            <label for="ocr_numero" class="form-label">Nº. Ocorrencia</label>
+                            <input
+                                    type="text"
+                                    class="form-control"
+                                    name="ocr_numero"
+                                    id="ocr_numero"
+                                    value="<?= $_GET['ocr_numero'] ?>"
+                            >
+                        </div>
+                        <div class="col-lg col-md-6 col-sm-6">
                             <label for="alu_nome" class="form-label">Aluno</label>
                             <input
                                     type="text"
@@ -86,9 +95,9 @@ include_once "../layout/breadcumbs.php";
                             >
                         </div>
 
-                        <div class="col">
+                        <div class="col-lg col-md-6 col-sm-6">
                             <label for="turma_id" class="form-label">Turma</label>
-                            <select class="form-control" name="turma_id">
+                            <select class="form-control" name="turma_id" id="turma_id">
                                 <option value=""></option>
                                 <?php
                                 $sql = "SELECT * FROM turmas ORDER BY turma_numero";
@@ -104,10 +113,29 @@ include_once "../layout/breadcumbs.php";
                                 <?php } ?>
                             </select>
                         </div>
+
+                        <div class="col-lg col-md-6 col-sm-6">
+                            <label for="tpo_id" class="form-label">Transgressão</label>
+                            <select class="form-control" name="tpo_id" id="tpo_id">
+                                <option value=""></option>
+                                <?php
+                                $sql = "SELECT * FROM tipos_ocorrencia ORDER BY tpo_nome";
+                                $stm_tipo_ocorrencia = $db->prepare($sql);
+                                $stm_tipo_ocorrencia->execute();
+                                $tipos_ocorrencia = $stm_tipo_ocorrencia->fetchAll(PDO::FETCH_OBJ);
+
+                                foreach ($tipos_ocorrencia as $tpo) { ?>
+                                    <option
+                                            value="<?= $tpo->tpo_id ?>"
+                                        <?= ($_GET['tpo_id'] and $_GET['tpo_id'] == $tpo->tpo_id) ? ' selected ' : '' ?>
+                                    ><?= $tpo->tpo_nome ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
                     </div>
 
-                    <div class="form-group mt-3">
-                        <button class="btn btn-success">Pesquisar</button>
+                    <div class="form-group mt-3 mb-2">
+                        <button class="btn btn-success text-white float-end">Pesquisar</button>
                     </div>
                 </form>
 
@@ -116,9 +144,10 @@ include_once "../layout/breadcumbs.php";
             <table class="table">
                 <thead>
                 <tr>
-                    <th style="width: 5%">#</th>
+                    <th style="width: 10%">#</th>
                     <th>Aluno</th>
                     <th>Turma</th>
+                    <th>Transgressão</th>
                     <th>Data</th>
                     <th>Ação</th>
                 </tr>
@@ -129,9 +158,10 @@ include_once "../layout/breadcumbs.php";
                 $i = 1;
                 foreach ($result as $row): ?>
                     <tr>
-                        <td><?= $i++; ?></td>
+                        <td><?= $row->ocr_numero ?></td>
                         <td><?= $row->alu_nome ?></td>
                         <td><?= $row->turma_numero ?></td>
+                        <td><?= $row->tpo_nome ?></td>
                         <td><?= date('d/m/Y H:i', strtotime($row->ocr_dtcriacao)) ?></td>
                         <td>
                             <a href="<?= Config::$baseUrl ?>/admin/ocorrencias/visualizar.php?id=<?= $row->ocr_id ?>">

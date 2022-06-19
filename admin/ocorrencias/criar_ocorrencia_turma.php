@@ -1,6 +1,7 @@
 <?php
 require_once "../../config/DBConnect.php";
 require_once "../../config/Config.php";
+require_once "../../config/Utils.php";
 
 $db = DBConnect::PDO();
 
@@ -37,6 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' and $_POST['acao'] === 'criar_ocorrenc
 
     $data['ocr_numero'] = 'OC' . date('ymd') . $max;
 
+    $data['part_id'] = $_SESSION['id'];
+
     foreach ($data as $name => $value) {
         $attr[] = "{$name} = '{$value}'";
     }
@@ -64,7 +67,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' and $_POST['acao'] === 'criar_ocorrenc
     exit();
 }
 
-$title = "Criar ocorrência";
+if ($_SERVER['REQUEST_METHOD'] === 'POST' and $_POST['select'] === 'select_periodo') {
+    $periodo = $_POST['periodo'];
+
+    $stm = $db->prepare("SELECT turma_id, turma_numero FROM turmas WHERE turma_periodo = '{$periodo}'");
+    $stm->execute();
+    $data = [];
+    $result = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($result as $item) {
+        $data[] = $item;
+    }
+
+    echo json_encode($data);
+    exit();
+}
+$title = "Criar ocorrência por turma";
 
 require_once('../layout/_header.php');
 
@@ -84,13 +102,13 @@ include_once "../layout/breadcumbs.php";
         padding-bottom: 3px;
     }
 
-    .ocorrencia ul {
+    ul.transgressao {
         list-style: none;
         column-count: 2;
         column-gap: 4rem;
     }
 
-    .select2-container{
+    .select2-container {
         width: 100% !important;
     }
 </style>
@@ -98,13 +116,14 @@ include_once "../layout/breadcumbs.php";
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-12 d-flex no-block align-items-center">
-            <h2 class="page-title">Criar ocorrência</h2>
+            <h2 class="page-title">Criar ocorrência por turma</h2>
             <div class="ms-auto text-end">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="<?= Config::$baseUrl ?>/admin">Início</a></li>
                         <li class="breadcrumb-item active" aria-current="page">
-                            Cadastrar ocorrências
+                            Cadastrar ocorrências da
+                            <turma></turma>
                         </li>
                     </ol>
                 </nav>
@@ -126,62 +145,45 @@ include_once "../layout/breadcumbs.php";
                             action=""
                             method="POST">
 
+
                         <input type="hidden" name="part_id" value="<?= $_SESSION['id'] ?>">
 
                         <div class="row">
-                            <div class="col-lg-12">
+                            <div class="col-lg-6">
                                 <div class="form-group mt-2">
-                                    <label for="turma_numero">Aluno:</label>
-                                    <select class="form-control select2" id="alu_id" name="alu_id" required>
+                                    <label for="turma_periodo">Período:</label>
+                                    <select id="turma_periodo" class="form-control" required>
                                         <option value=""></option>
-                                        <?php
-                                        $sql = "SELECT ta.alu_id, UPPER(a.alu_nome) AS alu_nome FROM turma_aluno ta "
-                                            . "INNER JOIN alunos a ON a.alu_id = ta.alu_id "
-                                            . "WHERE a.alu_situacao = '1' ORDER BY a.alu_nome";
-                                        $stm = $db->prepare($sql);
-                                        $stm->execute();
-
-                                        $result = $stm->fetchAll(PDO::FETCH_OBJ);
-
-                                        foreach ($result as $row) { ?>
-                                            <option value="<?= $row->alu_id ?>"><?= $row->alu_nome ?></option>
-                                        <?php } ?>
+                                        <?php foreach (Utils::getPeriodo() as $key => $value): ?>
+                                            <option value="<?= $key ?>"><?= $value ?></option>
+                                        <?php endforeach; ?>
                                     </select>
                                 </div>
                             </div>
 
-                        </div>
-
-                        <div class="row">
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
                                 <div class="form-group mt-2">
                                     <label for="turma_id">Turma:</label>
-                                    <input type="text" id="turma_numero" class="form-control" value="" readonly>
+                                    <select id="turma_id" class="form-control" required>
+                                        <option value=""></option>
+                                    </select>
 
-                                    <input type="hidden" id="turma_id" name="turma_id" value="">
                                 </div>
                             </div>
 
-                            <div class="col-lg-4">
-                                <div class="form-group mt-2">
-                                    <label for="turma_periodo">Período:</label>
-                                    <input type="text" id="turma_periodo" class="form-control" value="" readonly>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4">
-                                <div class="form-group mt-2">
-                                    <label for="turma_periodo">Responsável:</label>
-                                    <input type="text" id="alu_responsavel" class="form-control" value="" readonly>
-                                </div>
-                            </div>
                         </div>
 
+                        <div class="form-group mt-2">
+                            <label for="">Alunos</label>
+                            <div class="container-alunos">
+                                Nenhum aluno selecionado
+                            </div>
+                        </div>
                         <div class="row">
-                            <div class="col-md-7">
+                            <div class="col-md-6">
                                 <div class="form-group mt-2">
                                     <label>Transgressão</label>
-                                    <ul>
+                                    <ul class="transgressao">
                                         <?php
                                         $stm = $db->prepare("SELECT tpo_id, tpo_nome FROM tipos_ocorrencia WHERE tpo_situacao = '1'");
                                         $stm->execute();
@@ -209,7 +211,7 @@ include_once "../layout/breadcumbs.php";
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-6">
                                 <div class="form-group mt-2">
                                     <label for="ocr_observacao">Observações </label><small class="text-muted">
                                         (Opcional)</small>
@@ -224,7 +226,8 @@ include_once "../layout/breadcumbs.php";
                         </div>
 
                         <div class="form-group mt-2">
-                            <label for="ocr_descricao">Descrição da Ocorrência </label><small class="text-muted">
+                            <label for="ocr_descricao">Descrição da Ocorrência </label><small
+                                    class="text-muted">
                                 (Opcional)</small>
                             <textarea
                                     rows="3"
@@ -290,6 +293,43 @@ include_once "../layout/breadcumbs.php";
                 }
             })
         });
+
+        $("#turma_periodo").change(function () {
+            var periodo = $(this).val();
+
+            $.ajax({
+                url: "criar_ocorrencia_turma.php",
+                type: "POST",
+                data: {
+                    periodo,
+                    select: 'select_periodo'
+                },
+                dataType: "json",
+                success: function (response) {
+                    let html = '<option value=""></option>';
+
+                    response.map((item, index) => {
+                        html += `<option value="${item.turma_id}">${item.turma_numero}</option>`;
+                    })
+                    //html += ``;
+                    $("#turma_id").html(html);
+                }
+            });
+        });
+
+        $("#turma_id").change(function () {
+            var turma_id = $(this).val();
+
+            $.ajax({
+                url: "lista_alunos.php",
+                type: "POST",
+                data: {turma_id},
+                dataType: "html",
+                success: function (response) {
+                    $(".container-alunos").hide().html(response).fadeIn();
+                }
+            });
+        })
     });
 </script>
 <?php

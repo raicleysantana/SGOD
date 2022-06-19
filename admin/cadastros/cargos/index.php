@@ -1,10 +1,9 @@
 <?php
 require_once "../../../config/DBConnect.php";
+$db = DBConnect::PDO();
 
 if ($_POST and $_POST['acao'] === 'excluir') {
     $id = $_POST['id'];
-
-    $db = DBConnect::PDO();
 
     $stm = $db->prepare("DELETE FROM cargos WHERE cgo_id = '{$id}'");
 
@@ -69,7 +68,6 @@ include_once "../../layout/breadcumbs.php";
                             </thead>
                             <tbody>
                             <?php
-                            $db = DBConnect::PDO();
 
                             $query = "SELECT * FROM cargos";
                             $stm = $db->prepare($query);

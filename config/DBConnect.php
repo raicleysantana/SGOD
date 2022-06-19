@@ -1,5 +1,7 @@
 <?php
 
+require_once "Config.php";
+
 class DBConnect
 {
     public static $instance;
@@ -11,6 +13,12 @@ class DBConnect
 
     public static function PDO()
     {
+        date_default_timezone_set('America/Manaus');
+
+        if (empty(session_id()) && !headers_sent()) {
+            session_start();
+        }
+
         $dsn = 'mysql:dbname=' . self::DB_NAME . ';host=' . self::DB_SERVER;
 
         if (!isset(self::$instance)) {
@@ -27,8 +35,8 @@ class DBConnect
     public function auth()
     {
         session_start();
-        if (!isset($_SESSION['username'])) {
-            header("Location: http://localhost/BDManagement");
+        if (!isset($_SESSION['id'])) {
+            header("Location:" . Config::$baseUrl);
         }
     }
 
@@ -49,7 +57,6 @@ class DBConnect
             return true;
         }
     }
-
 
     public function login($username, $password)
     {
@@ -112,3 +119,5 @@ class DBConnect
     }
 
 }
+
+?>

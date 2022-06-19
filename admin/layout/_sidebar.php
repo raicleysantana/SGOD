@@ -71,18 +71,10 @@ include_once __DIR__ . "/../../config/Componentes.php";
                         </li>
 
                         <li class="sidebar-item">
-                            <a href="<?= Config::$baseUrl; ?>/admin/ocorrencias/cadastrar/index.php"
+                            <a href="<?= Config::$baseUrl; ?>/admin/ocorrencias/criar_ocorrencia_turma.php"
                                class="sidebar-link">
                                 <i class="mdi mdi-note-outline"></i>
                                 <span class="hide-menu">Criar Ocorrência por turma </span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item">
-                            <a href="<?= Config::$baseUrl; ?>/admin/ocorrencias/consultar/index.php"
-                               class="sidebar-link">
-                                <i class="mdi mdi-note-outline"></i>
-                                <span class="hide-menu">Consultar Ocorrência</span>
                             </a>
                         </li>
 

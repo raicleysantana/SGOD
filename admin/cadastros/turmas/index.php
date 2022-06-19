@@ -1,10 +1,9 @@
 <?php
 require_once "../../../config/DBConnect.php";
+$db = DBConnect::PDO();
 
 if ($_POST and $_POST['acao'] === 'excluir') {
     $id = $_POST['id'];
-
-    $db = DBConnect::PDO();
 
     $stm = $db->prepare("DELETE FROM turmas WHERE turma_id = '{$id}'");
 
@@ -71,7 +70,6 @@ include_once "../../layout/breadcumbs.php";
                             </thead>
                             <tbody>
                             <?php
-                            $db = DBConnect::PDO();
 
                             $query = "SELECT *, (SELECT COUNT(talu_id) FROM turma_aluno ta WHERE ta.turma_id = t.turma_id)AS qtd_alunos FROM turmas t";
                             $stm = $db->prepare($query);
