@@ -11,14 +11,14 @@ include_once __DIR__ . "/../../config/Componentes.php";
                 <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="<?= Config::$baseUrl ?>/admin"
                        aria-expanded="false">
-                        <i class="mdi mdi-view-dashboard"></i>
+                        <i class="mdi mdi-home"></i>
                         <span class="hide-menu">Início</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)"
                        aria-expanded="false">
-                        <i class="mdi mdi-receipt"></i><span class="hide-menu">Cadastros </span>
+                        <i class="mdi mdi-clipboard-text"></i><span class="hide-menu">Cadastros </span>
                     </a>
                     <ul aria-expanded="false" class="collapse first-level">
                         <li class="sidebar-item">
@@ -93,7 +93,7 @@ include_once __DIR__ . "/../../config/Componentes.php";
                             class="sidebar-link has-arrow waves-effect waves-dark"
                             href="javascript:void(0)"
                             aria-expanded="false">
-                        <i class="mdi mdi-receipt"></i><span class="hide-menu">Relatórios </span>
+                        <i class="mdi mdi-chart-line"></i><span class="hide-menu">Relatórios </span>
                     </a>
 
                     <ul aria-expanded="false" class="collapse first-level">
@@ -115,20 +115,6 @@ include_once __DIR__ . "/../../config/Componentes.php";
                     </ul>
                 </li>
 
-                <li class="sidebar-item">
-                    <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)"
-                       aria-expanded="false">
-                        <i class="mdi mdi-receipt"></i><span class="hide-menu">Configurações </span>
-                    </a>
-                    <ul aria-expanded="false" class="collapse first-level">
-                        <li class="sidebar-item">
-                            <a href="form-basic.html" class="sidebar-link">
-                                <i class="mdi mdi-note-outline"></i>
-                                <span class="hide-menu"> Geral </span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
             </ul>
         </nav>
         <!-- End Sidebar navigation -->

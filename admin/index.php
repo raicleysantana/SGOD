@@ -7,6 +7,7 @@ include_once "layout/navbar.php";
 include_once "layout/_sidebar.php";
 
 include_once "home.php";
+
 ?>
 
 

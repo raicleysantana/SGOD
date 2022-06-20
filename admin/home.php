@@ -17,6 +17,12 @@ $dados = $stm->fetch(PDO::FETCH_OBJ);
 
 
 <div class="container-fluid">
+    <div class="col-lg-12 mb-4">
+        <h3 class="text-center">
+            SISTEMA DE GESTÃO DE OCORRÊNCIAS DISCIPLINARES PEDAGOGICAS
+        </h3>
+    </div>
+
     <div class="col-lg-12">
         <div class="row">
             <div class="col-lg-3 col-6 mt-3">
@@ -39,7 +45,7 @@ $dados = $stm->fetch(PDO::FETCH_OBJ);
                 <div class="bg-dark p-10 text-white text-center">
                     <i class="mdi mdi-account fs-3 font-16"></i>
                     <h5 class="mb-0 mt-1"><?= $dados->qtd_parts ?></h5>
-                    <small class="font-light">Usuários</small>
+                    <small class="font-light">Participantes</small>
                 </div>
             </div>
 

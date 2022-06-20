@@ -64,6 +64,7 @@ include_once "../../layout/breadcumbs.php";
                                 <th scope="col" width="5%">#</th>
                                 <th scope="col">Nome</th>
                                 <th scope="col">Email</th>
+                                <th scope="col">Cargos</th>
                                 <th scope="col">Situação</th>
                                 <th scope="col">Ação</th>
                             </tr>
@@ -71,7 +72,8 @@ include_once "../../layout/breadcumbs.php";
                             <tbody>
                             <?php
 
-                            $query = "SELECT * FROM participantes";
+                            $query = "SELECT * FROM participantes p "
+                                . "LEFT JOIN cargos c ON c.cgo_id = p.cgo_id ";
                             $stm = $db->prepare($query);
                             $stm->execute();
 
@@ -83,6 +85,7 @@ include_once "../../layout/breadcumbs.php";
                                     <th scope="row"><?= $participante->part_id ?></th>
                                     <td><?= $participante->part_nome ?></td>
                                     <td><?= $participante->part_email ?></td>
+                                    <td><?= $participante->cgo_nome ?></td>
                                     <td><?= Utils::situacao($participante->part_situacao) ?></td>
                                     <td>
                                         <a

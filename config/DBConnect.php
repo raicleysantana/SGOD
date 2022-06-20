@@ -43,15 +43,16 @@ class DBConnect
     public function authLogin()
     {
         session_start();
-        if (isset($_SESSION['username'])) {
-            header("Location: http://localhost/BDManagement/home.php");
+
+        if (isset($_SESSION['id'])) {
+            header("Location: " . Config::$baseUrl . "/admin");
         }
     }
 
     public function checkAuth()
     {
         session_start();
-        if (!isset($_SESSION['username'])) {
+        if (!isset($_SESSION['id'])) {
             return false;
         } else {
             return true;
@@ -60,16 +61,17 @@ class DBConnect
 
     public function login($username, $password)
     {
-        $stmt = $this->db->prepare("SELECT * FROM usuario WHERE usu_usuario=? AND usu_senha=?");
+        session_start();
+
+        $stmt = self::PDO()->prepare("SELECT * FROM participantes WHERE part_usuario=? AND part_senha=?");
         $stmt->execute([$username, $password]);
+
         if ($stmt->rowCount() > 0) {
             session_start();
             $emp = $stmt->fetchAll();
             foreach ($emp as $e) {
-                $_SESSION['id'] = $e['id'];
-                $_SESSION['username'] = $username;
-                $_SESSION['password'] = $password;
-                $_SESSION['firstName'] = $e['f_name'];
+                $_SESSION['id'] = $e['part_id'];
+                $_SESSION['usu_nome'] = $username;
             }
 
             return true;
@@ -78,45 +80,13 @@ class DBConnect
         }
     }
 
-    public function addDonor($fname, $mname, $lname, $sex, $bType, $dob, $hAddress, $city, $donationDate, $stats, $temp,
-                             $pulse, $bp, $weight, $hemoglobin, $hbsag, $aids, $malariaSmear, $hematocrit, $mobile, $phone)
-    {
-        $stmt = $this->db->prepare("INSERT INTO donors (fname,mname,lname,sex,b_type,bday,h_address,city,don_date,stats,temp,pulse,bp,weight,"
-            . "hemoglobin,hbsag,aids,malaria_smear,hematocrit,mobile,phone)"
-            . "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-        $stmt->execute([$fname, $mname, $lname, $sex, $bType, $dob, $hAddress, $city, $donationDate, $stats, $temp, $pulse, $bp, $weight,
-            $hemoglobin, $hbsag, $aids, $malariaSmear, $hematocrit, $mobile, $phone]);
-        return true;
-
-    }
-
-    public function searchDonorWithBloodGroup($bloodGroup)
-    {
-        $stmt = $this->db->prepare("SELECT * FROM donors WHERE b_type LIKE ?");
-        $stmt->execute([$bloodGroup]);
-        return $stmt->fetchAll();
-    }
-
-    public function searchDonorByCity($city)
-    {
-        $stmt = $this->db->prepare("SELECT * FROM donors WHERE city LIKE ?");
-        $stmt->execute(["%" . $city . "%"]);
-        return $stmt->fetchAll();
-    }
-
     public function logout()
     {
         session_start();
         session_destroy();
-        header("Location: http://localhost/BDManagement/");
+        header("Location:" . Config::$baseUrl);
     }
 
-    public function getDonorProfileById($id)
-    {
-        $stmt = $this->db->prepare("SELECT * FROM donors WHERE id=?");
-        $stmt->execute([$id]);
-        return $stmt->fetchAll();
-    }
 
 }
 
