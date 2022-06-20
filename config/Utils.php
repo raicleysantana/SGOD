@@ -35,7 +35,7 @@ class Utils
 
     public static function periodo($periodo)
     {
-        $data = self::getSituacao();
+        $data = self::getPeriodo();
         return $data[$periodo] ?: 'Não definido';
     }
 }

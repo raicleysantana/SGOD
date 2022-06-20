@@ -28,7 +28,8 @@ $result = $stm->fetchAll(PDO::FETCH_OBJ);
                 <input
                         class="form-check-input"
                         type="checkbox"
-                        value="<?= $turma_aluno->talu_id ?>"
+                        name="alunos[]"
+                        value="<?= $turma_aluno->alu_id ?>"
                         id="check_<?= $turma_aluno->talu_id ?>"
                 >
                 <label class="form-check-label mb-0" for="check_<?= $turma_aluno->talu_id ?>">

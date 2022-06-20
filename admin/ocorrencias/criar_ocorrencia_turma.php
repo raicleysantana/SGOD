@@ -23,44 +23,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' and isset($_GET['alu_id'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' and $_POST['acao'] === 'criar_ocorrencia') {
-
     $data = $_POST;
 
-    $query = "";
-    $attr = [];
+    $alunos = $data['alunos'];
 
-    unset($data['acao']);
-
-    $stm_ocr = $db->prepare("SELECT MAX(ocr_id) AS max FROM ocorrencias LIMIT 1");
-    $stm_ocr->execute();
-    $max = $stm_ocr->fetch(PDO::FETCH_OBJ)->max;
-    $max = $max + 1;
-
-    $data['ocr_numero'] = 'OC' . date('ymd') . $max;
-
-    $data['part_id'] = $_SESSION['id'];
-
-    foreach ($data as $name => $value) {
-        $attr[] = "{$name} = '{$value}'";
-    }
-
-    $attr = implode(', ', $attr);
-
-    $query = "INSERT ocorrencias SET {$attr}";
+    unset($data['acao'], $data['alunos']);
 
     try {
 
-        $stm = $db->prepare($query);
-        $stm->execute();
+        foreach ($alunos as $aluno_id):
+            $attr = [];
+            $query = "";
+
+            $stm_ocr = $db->prepare("SELECT MAX(ocr_id) AS `max` FROM ocorrencias LIMIT 1");
+            $stm_ocr->execute();
+            $max = $stm_ocr->fetch(PDO::FETCH_OBJ)->max;
+            $max = $max + 1;
+
+            $data['ocr_numero'] = 'OC' . date('ymd') . $max;
+
+            $data['part_id'] = $_SESSION['id'];
+            $data['alu_id'] = $aluno_id;
+
+
+            foreach ($data as $name => $value) {
+                $attr[] = "{$name} = '{$value}'";
+            }
+
+            $attr_str = implode(', ', $attr);
+
+            $query = "INSERT ocorrencias SET {$attr_str}";
+
+            $stm = $db->prepare($query);
+            $stm->execute();
+
+        endforeach;
 
         $_SESSION['msg_sucesso'] = "Dados salvo com sucesso";
 
-        $id = $db->lastInsertId();
-
-        header("Location: " . Config::$baseUrl . "/admin/ocorrencias/visualizar.php?id={$id}");
+        header("Location: " . Config::$baseUrl . "/admin/ocorrencias/listagem.php");
     } catch (Exception $e) {
-        #var_dump($e);
-        #die;
         $_SESSION['msg_error'] = "Error ao salvar";
     }
 
@@ -164,7 +166,7 @@ include_once "../layout/breadcumbs.php";
                             <div class="col-lg-6">
                                 <div class="form-group mt-2">
                                     <label for="turma_id">Turma:</label>
-                                    <select id="turma_id" class="form-control" required>
+                                    <select name="turma_id" id="turma_id" class="form-control" required>
                                         <option value=""></option>
                                     </select>
 

@@ -15,6 +15,7 @@ if ($_POST and $_POST['acao'] === 'excluir') {
 
     exit();
 }
+
 $title = "Turmas";
 
 require_once('../../layout/_header.php');
@@ -71,7 +72,7 @@ include_once "../../layout/breadcumbs.php";
                             <tbody>
                             <?php
 
-                            $query = "SELECT *, (SELECT COUNT(talu_id) FROM turma_aluno ta WHERE ta.turma_id = t.turma_id)AS qtd_alunos FROM turmas t";
+                            $query = "SELECT *, (SELECT COUNT(talu_id) FROM turma_aluno ta WHERE ta.turma_id = t.turma_id) AS qtd_alunos FROM turmas t";
                             $stm = $db->prepare($query);
                             $stm->execute();
 
@@ -82,7 +83,7 @@ include_once "../../layout/breadcumbs.php";
                                 <tr id="turma-<?= $turma->turma_id ?>">
                                     <th scope="row"><?= $turma->turma_id ?></th>
                                     <td><?= $turma->turma_numero ?></td>
-                                    <td><?= Utils::periodo($turma->periodo) ?></td>
+                                    <td><?= Utils::periodo($turma->turma_periodo) ?></td>
                                     <td><i class="mdi mdi-account-multiple"></i> <?= $turma->qtd_alunos ?></td>
                                     <td><?= Utils::situacao($turma->turma_situacao) ?></td>
                                     <td>

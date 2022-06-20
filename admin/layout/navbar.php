@@ -1,18 +1,30 @@
+<style>
+    header .logo {
+        width: 70px;
+    }
+
+    @media only screen and (max-width: 500px) {
+        header .logo {
+            width: 60px;
+        }
+    }
+</style>
+
 <header class="topbar" data-navbarbg="skin5">
     <nav class="navbar top-navbar navbar-expand-md navbar-dark">
-        <div class="navbar-header" data-logobg="skin5">
+        <div class="navbar-header" data-logobg="skin5" style="height: 50px">
             <!-- ============================================================== -->
             <!-- Logo -->
             <!-- ============================================================== -->
             <a class="navbar-brand text-center justify-content-md-center" href="./" data-redirect="true">
                 <!-- Logo icon -->
-                <h3>
-                    <b class="logo-icon ps-2">
-                        <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                        <!-- Dark Logo icon -->
-                        SGODP
-                    </b>
-                </h3>
+                <b class="logo-icon ps-2">
+                    <img class="logo light-logo" src="<?= Config::$baseUrl ?>/img/logo.png" alt="logo">
+                    <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                    <!-- Dark Logo icon -->
+                    <!--SGODP-->
+                </b>
+
                 <!--End Logo icon -->
                 <!-- Logo text -->
 
@@ -266,3 +278,19 @@
         </div>
     </nav>
 </header>
+
+<script>
+    $(function () {
+        $('a.sidebartoggler').click(function () {
+
+            var sidebartype = $("#main-wrapper").attr('data-sidebartype');
+
+
+            if (sidebartype === "full") {
+                $("header .logo").css({width: 40}).parent().parent().removeClass('text-center justify-content-md-center');
+            } else {
+                $("header .logo").css({width: 70}).parent().parent().addClass('text-center justify-content-md-center');
+            }
+        });
+    });
+</script>

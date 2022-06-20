@@ -89,16 +89,30 @@ include_once __DIR__ . "/../../config/Componentes.php";
                 </li>
 
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="charts.html"
-                       aria-expanded="false">
-                        <i class="mdi mdi-chart-bar"></i><span class="hide-menu">Ocorrências</span>
+                    <a
+                            class="sidebar-link has-arrow waves-effect waves-dark"
+                            href="javascript:void(0)"
+                            aria-expanded="false">
+                        <i class="mdi mdi-receipt"></i><span class="hide-menu">Relatórios </span>
                     </a>
-                </li>
 
-                <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="tables.html"
-                       aria-expanded="false"><i class="mdi mdi-border-inside"></i><span
-                                class="hide-menu">Relatórios</span></a>
+                    <ul aria-expanded="false" class="collapse first-level">
+                        <li class="sidebar-item">
+                            <a href="<?= Config::$baseUrl; ?>/admin/relatorios/relatorio_geral.php"
+                               class="sidebar-link">
+                                <i class="mdi mdi-note-outline"></i>
+                                <span class="hide-menu"> Relatório geral </span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a href="<?= Config::$baseUrl; ?>/admin/relatorios/relatorios_turmas.php"
+                               class="sidebar-link">
+                                <i class="mdi mdi-note-outline"></i>
+                                <span class="hide-menu"> Relatório por turmas </span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 
                 <li class="sidebar-item">
