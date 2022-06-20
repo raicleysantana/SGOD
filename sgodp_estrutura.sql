@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 15-Jun-2022 às 05:28
+-- Tempo de geração: 20-Jun-2022 às 06:54
 -- Versão do servidor: 10.4.21-MariaDB
 -- versão do PHP: 7.4.24
 
@@ -62,6 +62,7 @@ CREATE TABLE `ocorrencias` (
   `part_id` int(11) DEFAULT NULL,
   `tpo_id` int(11) NOT NULL,
   `ocr_descricao` text DEFAULT NULL,
+  `ocr_observacao` text DEFAULT NULL,
   `ocr_dtcriacao` datetime NOT NULL DEFAULT current_timestamp(),
   `ocr_dtfinalizacao` datetime DEFAULT NULL,
   `ocr_punicao` varchar(45) DEFAULT NULL
@@ -187,6 +188,12 @@ ALTER TABLE `alunos`
 --
 ALTER TABLE `cargos`
   MODIFY `cgo_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `ocorrencias`
+--
+ALTER TABLE `ocorrencias`
+  MODIFY `ocr_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `participantes`
